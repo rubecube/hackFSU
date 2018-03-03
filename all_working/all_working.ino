@@ -95,7 +95,7 @@
 #include <Wire.h>
 #include <SPI.h>
 #include <Adafruit_LSM9DS1.h>
-#include <Adafruit_Sensor.h>  // not used in this demo but required!
+//#include <Adafruit_Sensor.h>  // not used in this demo but required!
 
 // i2c
 Adafruit_LSM9DS1 lsm = Adafruit_LSM9DS1();
@@ -212,15 +212,15 @@ int underworld_note[56] = {
   100,30, 30, 30
 };
 
-int GOTmelody[16] = { NOTE_G6, NOTE_C6,NOTE_DS6,NOTE_F6,
+int GOTmelody[14] = { NOTE_G6, NOTE_C6,NOTE_DS6,NOTE_F6,
                     NOTE_G6, NOTE_C6,NOTE_DS6,NOTE_F6, 
                     NOTE_G6, NOTE_C6,NOTE_DS6,NOTE_F6,
-                    NOTE_G6, NOTE_C6,NOTE_DS6,NOTE_F6,
+                    NOTE_D6,
                     };
-int GOTnote [16] = {  500, 500, 250,250,
+int GOTnote [14] = {  500, 500, 250,250,
                     500, 500, 250,250,
                     500, 500, 250,250,
-                    500, 500, 250,250};
+                    500};
 
 int HAPPYmelody[25] = { NOTE_G6, NOTE_G6, NOTE_A6, NOTE_G6,
                     NOTE_C6, NOTE_B6, NOTE_G6, NOTE_G6, 
@@ -260,7 +260,37 @@ int RICKnote[36] = {150,150,150,150,
                   150,150,150,150,
                   150,600,600,300};
 
- 
+int THUNDERmelody[32] = {
+  1976, 988, 1760, 988,
+  1661, 988, 1760, 988,
+  1661, 988, 1480, 988,
+  1661, 988, 1319, 988,
+  1480, 988, 1244, 988,
+  1319, 988, 1244, 988,
+  1319, 988, 1244, 988,
+  1319, 988, 1244, 988
+};
+
+int THUNDERnote[32]{
+  125, 125, 125, 125,
+  125, 125, 125, 125,
+  125, 125, 125, 125,
+  125, 125, 125, 125,
+  125, 125, 125, 125,
+  125, 125, 125, 125,
+  125, 125, 125, 125,
+  125, 125, 125, 125
+};
+
+#include <Adafruit_NeoPixel.h>
+#define PIN 5
+// small led 73
+// large led 116
+int ledLenght = 75;
+
+
+Adafruit_NeoPixel strip = Adafruit_NeoPixel(ledLenght, PIN, NEO_GRB + NEO_KHZ800);
+
 void setup(void)
 {
   pinMode(3, OUTPUT);//speaker
@@ -277,20 +307,21 @@ void setup(void)
 
   // helper to just set the default scaling we want, see above!
   setupSensor();
+  strip.begin();
+  strip.show();
   
 }
 
 
 void loop()
 {
-  //sing the tunes
-  /*for(int i = 0; i < sizeof(GOTmelody);i++){              /// working
-      buzz(melodyPin, HAPPYmelody[i] , HAPPYnote[i]);
-  }*/
-  //gyroSensor(); /// working
+  int rInt = 250;
+  int gInt = 00;
+  int bInt = 20;
+  
+
   int lenghtValue = lenghtOfSonar();
-  while (lenghtValue < 64 && lenghtValue != 0){           /// check if the person is close enought
-    //Serial.println("In the loop");
+  while (lenghtValue < 30 && lenghtValue != 0){           /// check if the person is close enought
 
     lsm.read();  // ask it to read in the data 
     // Get a new sensor event 
@@ -299,59 +330,66 @@ void loop()
     lsm.getEvent(&a, &m, &g, &temp); 
 
     Serial.print("Accel X: "); Serial.print(a.acceleration.x); Serial.print(" m/s^2");
-    Serial.print("\tY: "); Serial.print(a.acceleration.y);     Serial.print(" m/s^2 ");
-    Serial.print("\tZ: "); Serial.print(a.acceleration.z);     Serial.println(" m/s^2 ");
-  
-    Serial.print("Mag X: "); Serial.print(m.magnetic.x);   Serial.print(" gauss");
-    Serial.print("\tY: "); Serial.print(m.magnetic.y);     Serial.print(" gauss");
-    Serial.print("\tZ: "); Serial.print(m.magnetic.z);     Serial.println(" gauss");
-  
-    Serial.print("Gyro X: "); Serial.print(g.gyro.x);   Serial.print(" dps");
-    Serial.print("\tY: "); Serial.print(g.gyro.y);      Serial.print(" dps");
-    Serial.print("\tZ: "); Serial.print(g.gyro.z);      Serial.println(" dps");
-  
-    Serial.println();
+//    Serial.print("\tY: "); Serial.print(a.acceleration.y);     Serial.print(" m/s^2 ");
+//    Serial.print("\tZ: "); Serial.print(a.acceleration.z);     Serial.println(" m/s^2 ");
+//  
+//    Serial.print("Mag X: "); Serial.print(m.magnetic.x);   Serial.print(" gauss");
+//    Serial.print("\tY: "); Serial.print(m.magnetic.y);     Serial.print(" gauss");
+//    Serial.print("\tZ: "); Serial.print(m.magnetic.z);     Serial.println(" gauss");
+//  
+//    Serial.print("Gyro X: "); Serial.print(g.gyro.x);   Serial.print(" dps");
+//    Serial.print("\tY: "); Serial.print(g.gyro.y);      Serial.print(" dps");
+//    Serial.print("\tZ: "); Serial.print(g.gyro.z);      Serial.println(" dps");
+//  
+//    Serial.println();
     delay(200);  
 
     if (a.acceleration.z > 9){		//right side up (defualt position)
-        Serial.print("The total sizeof notes");
-        Serial.println(sizeof(GOTnote));
-	       for(int i = 0; i < sizeof(GOTmelody)/sizeof(int);i++){              /// Game of tho 16
-          Serial.print("The total sizeof notes ");
-          Serial.print(GOTmelody[i]);
-          Serial.print(" ");
 
-          Serial.println(GOTnote[i]);
+	       for(int i = 0; i < sizeof(GOTmelody)/sizeof(int);i++){              /// Game of tho 16
+
 
           buzz(melodyPin, GOTmelody[i] , GOTnote[i]);
+          theaterChase(strip.Color(  255, 255, 0),3); //red
+
          }
 
     }else if (a.acceleration.x < -9){	//turned left 90 degrees
 	//play song 1
 	       for(int i = 0; i < sizeof(MainMariomelody)/sizeof(int);i++){              /// Main Mario 78
           buzz(melodyPin, MainMariomelody[i] , MainMarionote[i]*23);
+          theaterChase(strip.Color(  69, 255, 69), 5);
          }
     }else if (a.acceleration.x > 9){	//turned right 90 degrees
+        
         for(int i = 0; i < sizeof(HAPPYmelody)/sizeof(int);i++){              /// Happy 25
           buzz(melodyPin, HAPPYmelody[i] , HAPPYnote[i]);
+          theaterChase(strip.Color(  225, 0, 255), 4); //red
+
          }
     }else if (a.acceleration.y < -9){	//turned away from 90 degrees
 	//play song 3
+      for (int i = 0; i<sizeof(THUNDERmelody)/sizeof(int); i++){
+        buzz(melodyPin, THUNDERmelody[i], THUNDERnote[i]);
+        theaterChase(strip.Color(255, 0, 0), 6);
+      }
  
     }else if (a.acceleration.y > 9){	//turned towards 90 degrees
 	//play song 4
        for(int i = 0; i < sizeof(underworld_melody)/sizeof(int);i++){              /// underworld 56
                buzz(melodyPin, underworld_melody[i] , underworld_note[i]*2);
+               theaterChase(strip.Color(  0, 0, 255), 2);
        }
     }else if (a.acceleration.z < -9){	//turned upside down
 	//play song 5 - rick roll
       for(int i=0; i < sizeof(RICKmelody)/sizeof(int); i++){
         buzz(melodyPin, RICKmelody[i], RICKnote[i]);
+        theaterChase(strip.Color(  rInt, gInt, bInt), 7);
       }
     }
 
     
-    if (lenghtOfSonar() > 75 || lenghtOfSonar() == 0){
+    if (lenghtOfSonar() > 35 || lenghtOfSonar() == 0){
         buzz(melodyPin, 0 , 0);
         break; 
     }
@@ -401,30 +439,6 @@ int lenghtOfSonar(){
   
 }
 
-/*void gyroSensor(){
-  lsm.read();  // ask it to read in the data 
-  // Get a new sensor event 
-  sensors_event_t a, m, g, temp;
-
-  lsm.getEvent(&a, &m, &g, &temp); 
-
-  Serial.print("Accel X: "); Serial.print(a.acceleration.x); Serial.print(" m/s^2");
-  Serial.print("\tY: "); Serial.print(a.acceleration.y);     Serial.print(" m/s^2 ");
-  Serial.print("\tZ: "); Serial.print(a.acceleration.z);     Serial.println(" m/s^2 ");
-
-  Serial.print("Mag X: "); Serial.print(m.magnetic.x);   Serial.print(" gauss");
-  Serial.print("\tY: "); Serial.print(m.magnetic.y);     Serial.print(" gauss");
-  Serial.print("\tZ: "); Serial.print(m.magnetic.z);     Serial.println(" gauss");
-
-  Serial.print("Gyro X: "); Serial.print(g.gyro.x);   Serial.print(" dps");
-  Serial.print("\tY: "); Serial.print(g.gyro.y);      Serial.print(" dps");
-  Serial.print("\tZ: "); Serial.print(g.gyro.z);      Serial.println(" dps");
-
-  Serial.println();
-  delay(200);
-
-  
-}*/
 
 void buzz(int targetPin, long frequency, long length) {
     long delayValue = 1000000 / frequency / 2; // calculate the delay value between transitions
@@ -441,3 +455,19 @@ void buzz(int targetPin, long frequency, long length) {
       delayMicroseconds(delayValue); // wait again or the calculated delay value
     } 
 }
+
+void theaterChase(uint32_t c, int pattern) {
+  for (int j=0; j<3; j++) {  //do 3 cycles of chasing
+    for (int q=0; q < pattern; q++) {
+      for (int i=0; i < strip.numPixels(); i=i+pattern) {
+        strip.setPixelColor(i+q, c);    //turn every pattern pixel on
+      }
+      strip.show();
+     
+      for (int i=0; i < strip.numPixels(); i=i+pattern) {
+        strip.setPixelColor(i+q, 0);        //turn every pattern pixel off
+      }
+    }
+  }
+}
+
