@@ -188,7 +188,7 @@ void loop()
 
 
     
-    if (lenghtOfSonar() > 75){
+    if (lenghtOfSonar() > 75 || lenghtOfSonar() == 0){
         break; 
     }
   }
