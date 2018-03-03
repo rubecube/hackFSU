@@ -200,8 +200,18 @@ void loop()
     Serial.println();
     delay(200);  
 
-
-    
+    if (a.acceleraion.z > 9);		//right side up (defualt position)
+	//play intro song
+    else if (a.acceleration.x < -9);	//turned left 90 degrees
+	//play song 1
+    else if (a.acceleration.x > 9);	//turned right 90 degrees
+    	//play song 2
+    else if (a.acceleration.y < -9);	//turned away from 90 degrees
+	//play song 3
+    else if (a.acceleration.y > 9);	//turned towards 90 degrees
+	//play song 4
+    else if (a.acceleration.z < -9);	//turned upside down
+	//play song 5
 
 
     
