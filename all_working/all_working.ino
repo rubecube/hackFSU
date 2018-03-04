@@ -119,7 +119,7 @@ int distance;
 
 
 //Mario main theme melody
-int MainMariomelody[78] = {
+int MainMariomelody[48] = {
   NOTE_E7, NOTE_E7, 0, NOTE_E7,
   0, NOTE_C7, NOTE_E7, 0,
   NOTE_G7, 0, 0,  0,
@@ -134,19 +134,19 @@ int MainMariomelody[78] = {
   NOTE_A7, 0, NOTE_F7, NOTE_G7,
   0, NOTE_E7, 0, NOTE_C7,
   NOTE_D7, NOTE_B6, 0, 0,
- 
-  NOTE_C7, 0, 0, NOTE_G6,
-  0, 0, NOTE_E6, 0,
-  0, NOTE_A6, 0, NOTE_B6,
-  0, NOTE_AS6, NOTE_A6, 0,
- 
-  NOTE_G6, NOTE_E7, NOTE_G7,
-  NOTE_A7, 0, NOTE_F7, NOTE_G7,
-  0, NOTE_E7, 0, NOTE_C7,
-  NOTE_D7, NOTE_B6, 0, 0
+// 
+//  NOTE_C7, 0, 0, NOTE_G6,
+//  0, 0, NOTE_E6, 0,
+//  0, NOTE_A6, 0, NOTE_B6,
+//  0, NOTE_AS6, NOTE_A6, 0,
+// 
+//  NOTE_G6, NOTE_E7, NOTE_G7,
+//  NOTE_A7, 0, NOTE_F7, NOTE_G7,
+//  0, NOTE_E7, 0, NOTE_C7,
+//  NOTE_D7, NOTE_B6, 0, 0
 };
 //Mario main them tempo
-int MainMarionote[78] = {
+int MainMarionote[48] = {
   12, 12, 12, 12,
   12, 12, 12, 12,
   12, 12, 12, 12,
@@ -161,16 +161,16 @@ int MainMarionote[78] = {
   12, 12, 12, 12,
   12, 12, 12, 12,
   12, 12, 12, 12,
-
-  12, 12, 12, 12,
-  12, 12, 12, 12,
-  12, 12, 12, 12,
-  12, 12, 12, 12,
-
-  9, 9, 9,
-  12, 12, 12, 12,
-  12, 12, 12, 12,
-  12, 12, 12, 12,
+//
+//  12, 12, 12, 12,
+//  12, 12, 12, 12,
+//  12, 12, 12, 12,
+//  12, 12, 12, 12,
+//
+//  9, 9, 9,
+//  12, 12, 12, 12,
+//  12, 12, 12, 12,
+//  12, 12, 12, 12,
 };
 //Underworld melody
 int underworld_melody[56] = {
@@ -222,23 +222,79 @@ int GOTnote [14] = {  500, 500, 250,250,
                     500, 500, 250,250,
                     500};
 
-int HAPPYmelody[25] = { NOTE_G6, NOTE_G6, NOTE_A6, NOTE_G6,
-                    NOTE_C6, NOTE_B6, NOTE_G6, NOTE_G6, 
-                    NOTE_A6, NOTE_G6, NOTE_D6, NOTE_C6,
-                    
-                    NOTE_G6, NOTE_G6,NOTE_G6,NOTE_E6,
-                    NOTE_C6, NOTE_B6,NOTE_A6,NOTE_F6, 
-                    NOTE_F6, NOTE_E6,NOTE_C6,NOTE_D6,
-                    NOTE_C6}; 
-                                  
-int HAPPYnote [25] = {250, 250, 500,500,
-                    500, 1000, 250,250,
-                    500, 500, 500,1000,
-                    
-                    250, 250, 500,500,
-                    500, 500, 500,250,
-                    250, 500, 500,500,
-                    1000};
+//int HAPPYmelody[25] = { NOTE_G6, NOTE_G6, NOTE_A6, NOTE_G6,
+//                    NOTE_C6, NOTE_B6, NOTE_G6, NOTE_G6, 
+//                    NOTE_A6, NOTE_G6, NOTE_D6, NOTE_C6,
+//                    
+//                    NOTE_G6, NOTE_G6,NOTE_G6,NOTE_E6,
+//                    NOTE_C6, NOTE_B6,NOTE_A6,NOTE_F6, 
+//                    NOTE_F6, NOTE_E6,NOTE_C6,NOTE_D6,
+//                    NOTE_C6}; 
+//                                  
+//int HAPPYnote [25] = {250, 250, 500,500,
+//                    500, 1000, 250,250,
+//                    500, 500, 500,1000,
+//                    
+//                    250, 250, 500,500,
+//                    500, 500, 500,250,
+//                    250, 500, 500,500,
+//                    1000};
+
+int SOSmelody[46]{          //86
+  NOTE_D5, 0, NOTE_F5, 0, 
+  NOTE_D6, 0, NOTE_D5, 0,
+  NOTE_F5, 0, NOTE_D6, 0,
+  NOTE_E6, 0, NOTE_F6, 0,
+  NOTE_E6, 0, NOTE_F6, 0,
+  NOTE_E6, 0, NOTE_C6, 0,
+  NOTE_A5, 0, NOTE_A5, 0,
+  NOTE_D5, 0, NOTE_F5, 0,
+  NOTE_G5, 0, NOTE_A5, 0,
+
+  NOTE_A5, 0, NOTE_D5, 0,
+  NOTE_F5, 0, NOTE_G5, 0,
+  NOTE_E5, 0,
+
+//  NOTE_D5, 0, NOTE_F5, 0,
+//  NOTE_D6, 0, NOTE_D5, 0,
+//  NOTE_F5, 0, NOTE_D6, 0,
+
+//  NOTE_E6, 0, NOTE_F6, 0,
+//  NOTE_E6, 0, NOTE_F6, 0,
+//  NOTE_E6, 0, NOTE_C6, 0,
+//  NOTE_A5, 0, NOTE_A5, 0,
+//  NOTE_D5, 0, NOTE_F5, 0,
+//  NOTE_G5, 0, NOTE_A5, 0,
+//  NOTE_A5, 0, NOTE_D5, 0
+};
+
+int SOSnote[46]{            //86
+  100,80,100,80,
+  200,250,100,80,
+  100,80,200,250,
+  200,200,100,100,
+  100,80,100,80,
+  100,80,100,80,
+  100,300,200,100,
+  200,100,100,100,
+  100,100,100,500,
+
+  200,100,200,100,
+  100,100,100,100,
+  100,500,
+  
+//  100,80,100,80,
+//  200,250,100,80,
+//  100,80,200,250,
+
+//  200,200,100,100,
+//  100,80,100,80,
+//  100,80,100,80,
+//  100,300,200,100,
+//  200,100,100,100,
+//  100,100,300,100,
+//  200,100,300,2000
+};
 
 int RICKmelody[36] = { NOTE_C6, NOTE_D6, NOTE_F6, NOTE_D6,
                     NOTE_A6, 0, NOTE_A6, NOTE_G6,
@@ -261,14 +317,14 @@ int RICKnote[36] = {150,150,150,150,
                   150,600,600,300};
 
 int THUNDERmelody[32] = {
-  1976, 988, 1760, 988,
-  1661, 988, 1760, 988,
-  1661, 988, 1480, 988,
-  1661, 988, 1319, 988,
-  1480, 988, 1244, 988,
-  1319, 988, 1244, 988,
-  1319, 988, 1244, 988,
-  1319, 988, 1244, 988
+  NOTE_B6, NOTE_B5, NOTE_A6, NOTE_B5,
+  NOTE_GS6, NOTE_B5, NOTE_A6, NOTE_B5,
+  NOTE_GS6, NOTE_B5, NOTE_FS6, NOTE_B5,
+  NOTE_GS6, NOTE_B5, NOTE_E6, NOTE_B5,
+  NOTE_FS6, NOTE_B5, NOTE_DS6, NOTE_B5,
+  NOTE_E6, NOTE_B5, NOTE_DS6, NOTE_B5,
+  NOTE_E6, NOTE_B5, NOTE_DS6, NOTE_B5,
+  NOTE_E6, NOTE_B5, NOTE_DS6, NOTE_B5
 };
 
 int THUNDERnote[32]{
@@ -286,7 +342,7 @@ int THUNDERnote[32]{
 #define PIN 5
 // small led 73
 // large led 116
-int ledLenght = 75;
+int ledLenght = 30;
 
 
 Adafruit_NeoPixel strip = Adafruit_NeoPixel(ledLenght, PIN, NEO_GRB + NEO_KHZ800);
@@ -362,8 +418,8 @@ void loop()
          }
     }else if (a.acceleration.x > 9){	//turned right 90 degrees
         
-        for(int i = 0; i < sizeof(HAPPYmelody)/sizeof(int);i++){              /// Happy 25
-          buzz(melodyPin, HAPPYmelody[i] , HAPPYnote[i]);
+        for(int i = 0; i < sizeof(SOSmelody)/sizeof(int);i++){              /// Happy 25
+          buzz(melodyPin, SOSmelody[i] , SOSnote[i]*2);
           theaterChase(strip.Color(  225, 0, 255), 4); //red
 
          }
